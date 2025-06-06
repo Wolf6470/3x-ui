@@ -69,7 +69,7 @@ confirm_restart() {
 }
 
 before_show_menu() {
-    echo && echo -n -e "${yellow}Press enter to return to the main menu: ${plain}" && read temp
+    echo && echo -n -e "${yellow}Press enter to return to the main menu: ${plain}" && read -r temp
     show_menu
 }
 
@@ -125,8 +125,8 @@ update_menu() {
 }
 
 legacy_version() {
-    echo "Enter the panel version (like 2.4.0):"
-    read tag_version
+    echo -n "Enter the panel version (like 2.4.0):"
+    read -r tag_version
 
     if [ -z "$tag_version" ]; then
         echo "Panel version cannot be empty. Exiting."
@@ -184,10 +184,8 @@ reset_user() {
     read -rp "Please set the login password [default is a random password]: " config_password
     [[ -z $config_password ]] && config_password=$(date +%s%N | md5sum | cut -c 1-8)
     /usr/local/x-ui/x-ui setting -username ${config_account} -password ${config_password} >/dev/null 2>&1
-    /usr/local/x-ui/x-ui setting -remove_secret >/dev/null 2>&1
     echo -e "Panel login username has been reset to: ${green} ${config_account} ${plain}"
     echo -e "Panel login password has been reset to: ${green} ${config_password} ${plain}"
-    echo -e "${yellow} Panel login secret token disabled ${plain}"
     echo -e "${green} Please use the new login username and password to access the X-UI panel. Also remember them! ${plain}"
     confirm_restart
 }
@@ -258,7 +256,8 @@ check_config() {
 }
 
 set_port() {
-    echo && echo -n -e "Enter port number[1-65535]: " && read port
+    echo -n "Enter port number[1-65535]: "
+    read -r port
     if [[ -z "${port}" ]]; then
         LOGD "Cancelled"
         before_show_menu
@@ -1731,7 +1730,7 @@ show_menu() {
 │   ${green}4.${plain} Legacy Version                            │
 │   ${green}5.${plain} Uninstall                                 │
 │────────────────────────────────────────────────│
-│   ${green}6.${plain} Reset Username & Password & Secret Token  │
+│   ${green}6.${plain} Reset Username & Password                 │
 │   ${green}7.${plain} Reset Web Base Path                       │
 │   ${green}8.${plain} Reset Settings                            │
 │   ${green}9.${plain} Change Port                               │
