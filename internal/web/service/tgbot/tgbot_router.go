@@ -1332,7 +1332,7 @@ func (t *Tgbot) answerCallback(callbackQuery *telego.CallbackQuery, isAdmin bool
 
 // checkAdmin checks if the given Telegram ID is an admin.
 func checkAdmin(tgId int64) bool {
-	return slices.Contains(adminIds, tgId)
+	return slices.Contains(adminSnapshot(), tgId)
 }
 
 // isClientSelfCallback reports whether a callback is per-user rather than
