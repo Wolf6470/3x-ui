@@ -89,6 +89,7 @@ var defaultValueMap = map[string]string{
 	"tgLang":                      "en-US",
 	"twoFactorEnable":             "false",
 	"twoFactorToken":              "",
+	"happLinkEnable":              "false",
 	"subEnable":                   "true",
 	"subJsonEnable":               "false",
 	"subJsonAutoDetect":           "false",
@@ -781,6 +782,10 @@ func (s *SettingService) GetTimeLocation() (*time.Location, error) {
 
 func (s *SettingService) GetSubEnable() (bool, error) {
 	return s.getBool("subEnable")
+}
+
+func (s *SettingService) GetHappLinkEnable() (bool, error) {
+	return s.getBool("happLinkEnable")
 }
 
 func (s *SettingService) GetSubJsonEnable() (bool, error) {
@@ -1602,6 +1607,7 @@ func (s *SettingService) GetDefaultSettings(host string) (any, error) {
 		"defaultKey":       func() (any, error) { return s.GetKeyFile() },
 		"tgBotEnable":      func() (any, error) { return s.GetTgbotEnabled() },
 		"subThemeDir":      func() (any, error) { return s.GetSubThemeDir() },
+		"happLinkEnable":   func() (any, error) { return s.GetHappLinkEnable() },
 		"subEnable":        func() (any, error) { return s.GetSubEnable() },
 		"subJsonEnable":    func() (any, error) { return s.GetSubJsonEnable() },
 		"subClashEnable":   func() (any, error) { return s.GetSubClashEnable() },

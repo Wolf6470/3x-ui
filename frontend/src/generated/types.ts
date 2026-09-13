@@ -3,7 +3,6 @@ export type GeoKind = string;
 export type OnlineAPISupport = number;
 export type ProcessState = string;
 export type Protocol = string;
-export type SubLinkProvider = unknown;
 export type staticEgressResolver = string;
 export type trafficLocalApplyAction = number;
 export type transportBits = number;
@@ -13,6 +12,7 @@ export interface AllSetting {
   expireDiff: number;
   externalTrafficInformEnable: boolean;
   externalTrafficInformURI: string;
+  happLinkEnable: boolean;
   ipLimitAllowlist: string;
   ldapAutoCreate: boolean;
   ldapAutoDelete: boolean;
@@ -149,6 +149,7 @@ export interface AllSettingView {
   expireDiff: number;
   externalTrafficInformEnable: boolean;
   externalTrafficInformURI: string;
+  happLinkEnable: boolean;
   hasApiToken: boolean;
   hasLdapPassword: boolean;
   hasNordSecret: boolean;
@@ -494,6 +495,10 @@ export interface GeodataTokenIssue {
   file?: string;
   reason: string;
   token: string;
+}
+
+export interface HappLinkResult {
+  encryptedLink: string;
 }
 
 export interface HistoryOfSeeders {
